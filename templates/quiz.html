@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container question">
+    {% for mensage in messages %}
+    <p class="error">{{ mensage }}</p>
+
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-12">
+           
+            <h1>Questão {{id}} - {{quiz}}</h1>
+
+            <form action="{% url 'quiz_submit' id %}" id="quizForm" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    {% if quiz.img_link %}
+                    <img class="img_question" src={{quiz.img_link}}>
+                    {% endif %}
+
+                    {% for alternative in alternatives %}
+                        <div class="form-check">
+                            <input class="form-check-input font" type="radio" name="resposta" value="{{alternative.text}}">
+                            <label class="form-check-label quiz-text" for="resposta">
+                                {{ alternative.text }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="buttonTeste" id="loginButton" onclick="return validateForm()">Enviar</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function validateForm() {
+        // Obtém todos os inputs de rádio dentro do formulário
+        var radios = document.querySelectorAll('input[type="radio"]');
+        var radioSelected = false;
+    
+        // Verifica se algum dos inputs de rádio está selecionado
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                radioSelected = true;
+                break;
+            }
+        }
+    
+        // Se nenhum input de rádio estiver selecionado, exibe um alerta e retorna false para cancelar o envio
+        if (!radioSelected) {
+            alert('Por favor, selecione uma opção.');
+            return false;
+        }
+    
+        // Se algum input de rádio estiver selecionado, permite o envio do formulário
+        return true;
+    }
+    </script>
+{% endblock %}
