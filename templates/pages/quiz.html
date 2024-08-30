@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container question">
+    {% for mensage in messages %}
+    <p class="error">{{ mensage }}</p>
+
+    {% endfor %}
+    <h2>{{numeros_chamados}}</h2>
+    <div class="row">
+        <div class="col-md-12 question_group">
+
+            <h1 class="">Questão {{id}} - {{quiz}}</h1>
+
+            <form action="{% url 'submit' id %}" id="quizForm" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    {% if quiz.img_link %}
+                    <img class="img_question" src={% static quiz.img_link %}>
+                    {% endif %}
+
+                    {% for alternative in alternatives %}
+                    <div class="form-check">
+                        <input class="form-check-input font" type="radio" name="resposta" value="{{alternative.text}}">
+                        <label class="form-check-label quiz-text" for="resposta">
+                            {{ alternative.text }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="buttonTeste" id="loginButton"
+                    onclick="return validateForm()">Enviar</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/quiz.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-container">
+  <h1 class="max">Bem vindo ao jogo de palavras.</h1>
+  <img src="{%static 'imgs/banner.png'%}">
+  <p class="m">Se trata de um quiz, onde o jogador irá trabalhar perguntas extimulates, voltado para pessoas com
+    dislexia.</p>
+  <form method="POST" action="{% url 'quiz' 1 %}">
+    {% csrf_token %}
+    <button type="submit" id="loginButton">Ok, vamo lá então!😀</button>
+  </form>
+
+</div>
+
+{% endblock content %}

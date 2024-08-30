@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo do Mario</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: #87CEEB;
+            font-family: Arial, sans-serif;
+        }
+
+        .game-container {
+            position: relative;
+            width: 800px;
+            height: 300px;
+            overflow: hidden;
+            background-color: #87CEEB;
+            border: 2px solid #000;
+        }
+
+        .mario {
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://cdn1023.clicrbs.com.br/wp-content/uploads/sites/2/2022/02/bon-jovi-4.jpg');
+            background-position: 0 -50px;
+            background-size: cover;
+        }
+
+        .pipe {
+            position: absolute;
+            bottom: 0;
+            right: -50px;
+            width: 40px;
+            height: 40px;
+            background-image: url('https://cdn.pixabay.com/photo/2023/05/07/04/47/panda-7975538_1280.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation: movePipe 2s infinite linear;
+        }
+
+        @keyframes movePipe {
+            0% {
+                right: -50px;
+            }
+
+            100% {
+                right: 800px;
+            }
+        }
+
+        .jump {
+            animation: jump 0.5s linear;
+        }
+
+        @keyframes jump {
+            0% {
+                bottom: 0;
+            }
+
+            50% {
+                bottom: 150px;
+            }
+
+            100% {
+                bottom: 0;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .modal-content button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Salve o bonjovi do panda, não deixe que o encoste nele</h1>
+    <div class="game-container">
+        <div class="mario" id="mario"></div>
+        <div class="pipe" id="pipe"></div>
+    </div>
+    <h2>Use a tecla de espaço para pular</h2>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <p>Parabéns! Você salvou o bonjovi.</p>
+            <button id="successButton">Receber prêmio</button>
+        </div>
+    </div>
+
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <p>Game Over!</p>
+            <button id="retryButton">Tentar novamente</button>
+        </div>
+    </div>
+
+    <script>
+        const mario = document.getElementById('mario');
+        const pipe = document.getElementById('pipe');
+        const successModal = document.getElementById('successModal');
+        const gameOverModal = document.getElementById('gameOverModal');
+        const successButton = document.getElementById('successButton');
+        const retryButton = document.getElementById('retryButton');
+
+        let jumpCount = 0;
+
+        function jump() {
+            if (!mario.classList.contains('jump')) {
+                mario.classList.add('jump');
+                setTimeout(() => {
+                    mario.classList.remove('jump');
+                }, 500);
+                jumpCount++;
+                if (jumpCount >= 13) {
+                    successModal.style.display = 'flex';
+                    clearInterval(checkCollision);
+                }
+            }
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'Space') {
+                jump();
+            }
+        });
+
+        document.addEventListener('touchstart', function () {
+            jump();
+        });
+
+        const checkCollision = setInterval(() => {
+            const marioBottom = parseInt(window.getComputedStyle(mario).getPropertyValue('bottom'));
+            const pipeLeft = parseInt(window.getComputedStyle(pipe).getPropertyValue('left'));
+
+            if (pipeLeft > 0 && pipeLeft < 80 && marioBottom <= 36) {
+                pipe.style.animation = 'none';
+                pipe.style.left = `${pipeLeft}px`;
+                gameOverModal.style.display = 'flex';
+                clearInterval(checkCollision);
+            }
+        }, 10);
+
+        successButton.addEventListener('click', () => {
+            window.location.href = '{% url "premio" %}';
+        });
+
+
+        retryButton.addEventListener('click', () => {
+            window.location.reload();
+        });
+
+    </script>
+</body>
+
+</html>

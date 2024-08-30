@@ -1,0 +1,279 @@
+body {
+    background-color: #D54F32;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.main-cotainer{
+    max-width: 600px;
+}
+.login-container,
+.question-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h1,
+.question-container h1 {
+    color: black;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.login-container input,
+.question-container input {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #57443F;
+    border-radius: 0.25rem;
+}
+.login-container img{
+    width: 100%;
+}
+.form-check{
+    display:flex;
+    align-items:center;
+    gap:10px
+}
+.login-container button,
+.question-container button {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ffac97;
+
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    color: #D54F32;
+    font-weight: bold;
+    border-radius: 10rem;
+}
+
+.login-container button:hover,
+.question-container button:hover{
+    background-color: #D54F32;
+    color: #ffffff;
+}
+
+.hidden {
+    display: none;
+}
+.error{
+    color: red;
+}
+.max{
+    font-size: 1.8rem;
+}
+.m{
+    margin: 1rem 0
+}
+.question{
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    max-width:600px
+}
+.question_group h1{
+    font-size: 1.2rem;
+}
+.buttonTeste
+{
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ffac97;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    color: #D54F32;
+    font-weight: bold;
+    border-radius: 10rem;
+}
+.buttonTeste:hover{
+    background-color: #D54F32;
+    color: #ffffff;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #87CEEB;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background-color: #87CEEB;
+    border: 2px solid #000;
+}
+
+.mario {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://www.spriters-resource.com/resources/sheets/15/15542.png');
+    background-position: 0 -50px;
+    background-size: cover;
+}
+
+.pipe {
+    position: absolute;
+    bottom: 0;
+    right: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    animation: movePipe 2s infinite linear;
+}
+
+@keyframes movePipe {
+    0% {
+        right: -50px;
+    }
+    100% {
+        right: 100%;
+    }
+}
+
+.jump {
+    animation: jump 0.5s linear;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+    50% {
+        bottom: 150px;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+.img_question{
+    width:100%;
+    max-height:10rem;
+}
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: orangered;
+    font-family: Arial, sans-serif;
+}
+
+.game-container {
+    position: relative;
+    width: 800px;
+    height: 300px;
+    overflow: hidden;
+    background-color: #87CEEB;
+    border: 2px solid #000;
+}
+.question_group label{
+    font-size:1rem;
+    font-weight: 400;
+}
+.question_group input{
+    border: 1px solid orangered;
+}
+
+.mario {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://cdn1023.clicrbs.com.br/wp-content/uploads/sites/2/2022/02/bon-jovi-4.jpg');
+    background-position: 0 -50px;
+    background-size: cover;
+}
+
+.pipe {
+    position: absolute;
+    bottom: 0;
+    right: -50px;
+    width: 30px;
+    height: 30px;
+    background-image: url('https://cdn.pixabay.com/photo/2023/05/07/04/47/panda-7975538_1280.png');
+    background-position:center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: movePipe 2s infinite linear;
+}
+
+@keyframes movePipe {
+    0% {
+        right: -50px;
+    }
+    100% {
+        right: 800px;
+    }
+}
+
+.jump {
+    animation: jump 0.5s linear;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+    50% {
+        bottom: 150px;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.modal-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+.text-final{
+    font-size: 1.8rem;
+    color: rgb(70, 34, 34);
+    font-weight: 700;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
